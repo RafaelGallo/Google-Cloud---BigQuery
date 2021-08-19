@@ -1,4 +1,4 @@
-# Google-Cloud---BigQuery
+# Google-Cloud BigQuery
 Projetos no google cloud com BigQuery 
 
 [![author](https://img.shields.io/badge/author-RafaelGallo-red.svg)](https://github.com/RafaelGallo?tab=repositories) 
@@ -6,8 +6,10 @@ Projetos no google cloud com BigQuery
 [![](https://img.shields.io/badge/Big_Query-write.svg)](https://cloud.google.com/bigquery) 
 [![](https://img.shields.io/badge/Google_Data_Studio-write.svg)](https://support.google.com/datastudio/answer/6283323?hl=pt-BR) 
 
-
-
 ![IMG](https://github.com/RafaelGallo/Google-Cloud---Datalab-machine-learning-/blob/main/im/001.gif)
 
+# Projeto 
+* Consulta no bigquery usando o consultas no bigquery.
+
+# Dashboards usando o Google cloud com BigQuery.
 

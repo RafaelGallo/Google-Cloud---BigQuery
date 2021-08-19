@@ -8,7 +8,7 @@ Projetos no google cloud com BigQuery
 ![IMG](https://github.com/RafaelGallo/Google-Cloud---Datalab-machine-learning-/blob/main/im/001.gif)
 
 # Projeto 
-* Consulta no bigquery usando o consultas no bigquery.
+* Consulta no bigquery usando as consultas no bigquery.
 
 # Dashboards 
 * Usando o Google cloud com BigQuery.

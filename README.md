@@ -2,9 +2,9 @@
 Projetos no google cloud com BigQuery 
 
 [![author](https://img.shields.io/badge/author-RafaelGallo-red.svg)](https://github.com/RafaelGallo?tab=repositories) 
-[![](https://img.shields.io/badge/GoogleCloud-write.svg)](https://cloud.google.com/)
-[![](https://img.shields.io/badge/BigQuery-blue.svg)](https://cloud.google.com/bigquery) 
-[![](https://img.shields.io/badge/GoogleDataStudio-gree.svg)](https://support.google.com/datastudio/answer/6283323?hl=pt-BR) 
+[![](https://img.shields.io/badge/Google_Cloud-write.svg)](https://cloud.google.com/)
+[![](https://img.shields.io/badge/Big_Query-write.svg)](https://cloud.google.com/bigquery) 
+[![](https://img.shields.io/badge/Google_Data_Studio-write.svg)](https://support.google.com/datastudio/answer/6283323?hl=pt-BR) 
 
 
 

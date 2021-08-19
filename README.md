@@ -13,4 +13,4 @@ Projetos no google cloud com BigQuery
 # Dashboards 
 * Usando o Google cloud com BigQuery.
 
-[![Dashboard 02 - Vendas por cidade](https://datastudio.google.com/reporting/cc3b800b-d362-42e9-bbad-cad1f20dce7b/page/BCKYC)
+[![](Dash 01)(https://datastudio.google.com/reporting/cc3b800b-d362-42e9-bbad-cad1f20dce7b/page/BCKYC)

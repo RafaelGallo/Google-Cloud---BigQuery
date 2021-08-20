@@ -12,6 +12,5 @@ Projetos no google cloud com BigQuery
 # Dashboards 
 * Usando o Google cloud com BigQuery.
 
-[<img src="https://img.shields.io/badge/Dashboard_1_Dashboard_RH-%231DA1F2.svg?&style=for-the-badge&logo=Dashboard&logoColor=white" />](https://datastudio.google.com/reporting/7e8654b0-24f2-4a71-b819-cc6bd4780931)
-
-[<img src="https://img.shields.io/badge/Dashboard_2_Dashboard_Vendas_por_estado-%231DA1F2.svg?&style=for-the-badge&logo=Dashboard&logoColor=white" />](https://datastudio.google.com/reporting/cc3b800b-d362-42e9-bbad-cad1f20dce7b/page/BCKYC)
+[<img src="https://img.shields.io/badge/Dashboard_1_Dashboard_Vendas_por_estado-%231DA1F2.svg?&style=for-the-badge&logo=Dashboard&logoColor=white" />](https://datastudio.google.com/reporting/cc3b800b-d362-42e9-bbad-cad1f20dce7b/page/BCKYC)
+ 

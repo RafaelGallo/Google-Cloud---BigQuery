@@ -1,0 +1,49 @@
+Comando de BigQuery GeoViz
+
+SELECT ST_GEOGPOINT(longitude, latitude) AS Station, num_bikes_available
+FROM 
+`bigquery-public-data.new_york.citibike_stations`
+WHERE num_bikes_available > 10;
+
+1 Para fazer uma linha entre dois pontos digite o código:
+
+SELECT ST_MAKELINE(ARRAY_AGG(Ponto)) as Linha FROM 
+(SELECT ST_GEOGPOINT(-22.9349, -43.1730) AS Ponto
+UNION ALL SELECT ST_GEOGPOINT(-22.9365, -43.1771));
+
+2) Para calcular a distância entre dois pontos use o código:
+
+SELECT ST_DISTANCE (ST_GEOGPOINT(-22.9349, -43.1730),
+                    ST_GEOGPOINT(-22.9365, -43.1771))
+AS Distancia;COPIAR CÓDIGO
+
+3) Para desenhar um polígono copie o código:
+
+SELECT ST_MAKEPOLYGON(ST_MAKELINE(ARRAY_AGG(Ponto))) as Poligono FROM 
+(SELECT ST_GEOGPOINT(-22.9349, -43.1730) AS Ponto
+UNION ALL SELECT ST_GEOGPOINT(-22.9365, -43.1771)
+UNION ALL SELECT ST_GEOGPOINT(-22.9375, -43.1781));COPIAR CÓDIGO
+
+4) Para calcular a área do polígono use o código:
+
+SELECT ST_AREA(ST_MAKEPOLYGON(ST_MAKELINE(ARRAY_AGG(Ponto)))) as Area FROM 
+(SELECT ST_GEOGPOINT(-22.9349, -43.1730) AS Ponto
+UNION ALL SELECT ST_GEOGPOINT(-22.9365, -43.1771)
+UNION ALL SELECT ST_GEOGPOINT(-22.9375, -43.1781));
+
+5) Vamos fazer algumas consultas usando a tabela curso-big-query-0965.sucos_vendas.tabela_de_clientes referente a base de dados criada e carregada no curso anterior.
+
+6) Para saber se a data da idade dos clientes, na base de dados, corresponde a idade real podemos fazer a seguinte consulta:
+
+WITH TAB_IDADE AS (
+SELECT NOME, DATE_DIFF(CURRENT_DATE, DATA_DE_NASCIMENTO, YEAR) AS IDADE_ATUAL, IDADE 
+FROM `curso-big-query-0965.sucos_vendas.tabela_de_clientes`)
+
+SELECT NOME, IDADE_ATUAL, IDADE,
+CASE WHEN (IDADE_ATUAL - IDADE) <> 0 THEN 'IDADE NÃO BATE'
+ELSE 'IDADE BATE COM A BASE DE DADOS' END AS RESULTADO FROM TAB_IDADE;COPIAR CÓDIGO
+
+7) Outro problema é o de apresentar o endereço completo de cada cliente Para isso faça:
+
+SELECT CPF, NOME, CONCAT(ENDERECO_1, ' ', BAIRRO, ' ', CIDADE, ' ', ESTADO, ' ', CEP) AS ENDERECO_COMPLETO FROM `curso-big-query-0965.sucos_vendas.tabela_de_clientes`
+ORDER BY NOME ;

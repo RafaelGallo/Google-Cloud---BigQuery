@@ -1,0 +1,110 @@
+Aula 02 - Selecionando dados
+
+- Filtro
+- Subquery
+- Order
+- 
+
+SELECT gender, tripduration
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips
+LIMIT 5;
+
+SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+LIMIT 5;
+
+SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE citibike_trips.tripduration < 600
+LIMIT 5;
+
+SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE (citibike_trips.tripduration < 600 
+    AND citibike_trips.gender = 'female') 
+    OR citibike_trips.gender = 'male'
+LIMIT 5;
+
+SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE (NOT (citibike_trips.tripduration < 600 
+    AND citibike_trips.gender = 'female') )
+    OR (citibike_trips.gender = 'male')
+LIMIT 5;
+
+
+SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE duration_minutes < 10
+LIMIT 5;
+
+SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE (citibike_trips.tripduration/60) < 10
+LIMIT 5;
+
+SELECT * FROM (SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips)
+WHERE duration_minutes < 10
+LIMIT 5;
+
+WITH all_trips AS (SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips)
+SELECT * FROM all_trips WHERE duration_minutes < 10
+LIMIT 5;
+
+SELECT citibike_trips.gender, citibike_trips.tripduration/60 AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE citibike_trips.gender = 'female'
+ORDER BY duration_minutes DESC
+LIMIT 5;
+
+
+Aula 03 - Agregação de dados
+
+comandos SQL
+- Group by
+- Count
+- Having
+- Distinct
+
+SELECT citibike_trips.gender, AVG(citibike_trips.tripduration/60) AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+GROUP BY citibike_trips.gender
+ORDER BY duration_minutes DESC;
+
+SELECT citibike_trips.gender, MAX(citibike_trips.tripduration/60) AS duration_minutes_MAX
+, MIN(citibike_trips.tripduration/60) AS duration_minutes_MIN, SUM(citibike_trips.tripduration/60) AS duration_minutes_SUM
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+GROUP BY citibike_trips.gender;
+
+SELECT citibike_trips.gender, Count(*) AS Rides, AVG(citibike_trips.tripduration/60) AS duration_minutes
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+GROUP BY citibike_trips.gender
+ORDER BY duration_minutes DESC;
+
+select count(*) from `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips;
+
+SELECT citibike_trips.gender, AVG(citibike_trips.tripduration/60) AS duration_minutes_AVG
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+GROUP BY citibike_trips.gender
+HAVING AVG(citibike_trips.tripduration/60) <= 18;
+
+SELECT citibike_trips.gender, AVG(citibike_trips.tripduration/60) AS duration_minutes_AVG
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+GROUP BY citibike_trips.gender
+HAVING duration_minutes_AVG <= 18;
+
+SELECT DISTINCT citibike_trips.gender FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips;
+
+SELECT citibike_trips.bikeid, citibike_trips.tripduration, citibike_trips.gender FROM 
+`bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE gender = ""
+LIMIT 100;
+
+SELECT DISTINCT citibike_trips.gender FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE citibike_trips.bikeid IS NOT NULL;
+
+
+SELECT DISTINCT citibike_trips.gender, citibike_trips.usertype FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE citibike_trips.bikeid IS NOT NULL;

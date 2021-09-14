@@ -1,0 +1,75 @@
+# Aula 04 - Array
+
+SELECT 
+gender, EXTRACT(YEAR FROM starttime) AS year, COUNT(1) AS numtrips
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE gender != "unknown" AND starttime IS NOT NULL
+GROUP BY gender, year
+HAVING year > 2016;
+
+SELECT gender, ARRAY_AGG (numtrips ORDER BY year) FROM 
+(SELECT 
+gender, EXTRACT(YEAR FROM starttime) AS year, COUNT(1) AS numtrips
+FROM `bigquery-public-data`.new_york_citibike.citibike_trips citibike_trips
+WHERE gender != 'unknown' AND starttime IS NOT NULL
+GROUP BY gender, year
+HAVING year > 2016)
+GROUP BY gender;
+
+# Aula - Array Struct
+
+SELECT [
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+] AS bikerides;
+
+SELECT [
+STRUCT('MALE' , [9306602, 3955871]),
+STRUCT('FEMALE', [3236735, 1260893] )
+];
+
+SELECT ARRAY_LENGTH(bikerides) FROM
+(SELECT [
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+] AS bikerides);
+
+SELECT ARRAY_LENGTH(bikerides), bikerides[OFFSET(0)].gender AS fist_gender FROM
+(SELECT [
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+] AS bikerides);
+
+SELECT ARRAY_LENGTH(bikerides), bikerides[OFFSET(1)].gender AS fist_gender FROM
+(SELECT [
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+] AS bikerides);
+
+SELECT ARRAY_LENGTH(bikerides), bikerides[OFFSET(1)].numtrips[OFFSET(0)] AS fist_gender FROM
+(SELECT [
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+] AS bikerides);
+
+Aula - Comando UNNEST
+
+SELECT * FROM UNNEST ([
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+]);
+
+SELECT gender FROM UNNEST ([
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+]);
+
+SELECT numtrips FROM UNNEST ([
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+]);
+
+SELECT gender, numtrips[OFFSET(0)] AS First_Element FROM UNNEST ([
+STRUCT('MALE' AS gender, [9306602, 3955871] AS numtrips),
+STRUCT('FEMALE' AS gender, [3236735, 1260893] AS numtrips)
+]);
